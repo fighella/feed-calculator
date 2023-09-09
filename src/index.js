@@ -91,7 +91,7 @@ function calculate_amount(age, weight, desexed, activity) {
   const weight_filter = age_filter.filter((row) => {
     return row.includes(weight) == true;
   });
-  //console.log("Weight Filter", weight_filter);
+  console.log("Weight Filter", weight_filter);
 
   var desexed_addition = 0;
   if (desexed.includes("Yes")) {
