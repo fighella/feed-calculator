@@ -1,4 +1,4 @@
-// Load in DESEXED for all ages (even if no change)
+// Load in DESEXED for all ages (even if no change) ---
 // AGE		WEIGHT,False,5-10,False, 30,False, 30+,True, 5-10,True, 30,True, 30+ (True/False is desexed)
 var feedAmounts = [0.2, 0.5, 1];
 var feedAmountNames = ["Topper", "Booster", "Full"];
