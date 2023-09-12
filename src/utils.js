@@ -42,6 +42,10 @@ function prettyNumber(_number, el) {
   }
 }
 
+const selectVariantByTitle = (variantTitle) => {
+  document.querySelector(`[value="${variantTitle}"]`).click();
+};
+
 const decimalToFraction = (_decimal) => {
   var top = (Math.ceil(_decimal * 4) / 4)
     .toFixed(2)
@@ -85,4 +89,5 @@ export {
   convertStringToHTML,
   parameterizeString,
   checkIsCalculator,
+  selectVariantByTitle,
 };

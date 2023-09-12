@@ -1,4 +1,4 @@
-import { parameterizeString } from "./utils";
+import { parameterizeString, selectVariantByTitle } from "./utils";
 import { _age_input, _flavor_input } from "./data";
 
 const showProducts = async (products) => {
@@ -35,6 +35,8 @@ const showProducts = async (products) => {
       productItem.append(variant_item);
     });
     const cloneDiv = productFromDom.cloneNode(true);
+    const active_variant_id = document.querySelector(".calc_days.active");
+    selectVariantByTitle(active_variant_id.dataset.variantTitle);
     productItemList.appendChild(cloneDiv);
     const subscriptionLink = document.createElement("a");
     subscriptionLink.href = `/products/${product.handle}?variant=${product.variants[0].id}`;

@@ -1,5 +1,5 @@
 import { calculate_amount } from "./calc";
-import { activeFeedAmount } from "./index";
+import { selectVariantByTitle } from "./utils";
 
 import {
   _age_input,
@@ -17,8 +17,36 @@ const showDaySelector = (products) => {
   });
   const daySelector = document.getElementById("day-selector");
   daySelector.innerHTML = "";
+  const tabs_features = document.createElement("div");
+  tabs_features.classList.add("tabs_features");
   const tabs = document.createElement("div");
   tabs.classList.add("tabs");
+  filteredProducts[0].variants.forEach((variant) => {
+    const tab = document.createElement("div");
+    const savings = document.createElement("div");
+    tab.classList.add("feature_tab");
+    // if (variant.title.includes("300")) {
+    //   return false
+    // }
+    // if (variant.title.includes("900")) {
+    //   return false
+    // }
+    if (variant.title.includes("5") && !variant.title.includes("2.5")) {
+      savings.classList.add("savings");
+      savings.innerText = "Save 20%";
+      tab.appendChild(savings);
+    }
+    if (variant.title.includes("2.5")) {
+      savings.classList.add("savings");
+      savings.innerText = "Save 10%";
+      tab.appendChild(savings);
+    }
+    tabs_features.appendChild(tab);
+  });
+  const tabs_featureholder = document.getElementById("day-selector-features");
+  tabs_featureholder.innerHTML = "";
+  tabs_featureholder.appendChild(tabs_features);
+
   filteredProducts[0].variants.forEach((variant) => {
     const details = document.createElement("div");
     const tab = document.createElement("div");
@@ -37,7 +65,9 @@ const showDaySelector = (products) => {
     days.innerText = calculate_amount();
     tab.classList.add("weeks-tab-button", "calc_days");
     tab.dataset.tabType = "weeks";
-
+    if (variant.title.includes("2.5") == true) {
+      tab.classList.add("active");
+    }
     tab.dataset.tab = `weeks-${variant.sku.split(" ")[1]}`;
     const activeFeedAmountSpan = document.createElement("div");
     activeFeedAmountSpan.classList.add("active-feed-amount");
@@ -47,7 +77,7 @@ const showDaySelector = (products) => {
     if (variant.title.includes("900")) {
       var size_number = 15;
     }
-    if (variant.title.includes("5")) {
+    if (variant.title.includes("5") && !variant.title.includes("2.5")) {
       var size_number = 84;
     }
     if (variant.title.includes("2.5")) {
@@ -63,7 +93,15 @@ const showDaySelector = (products) => {
     tab.appendChild(activeFeedAmountSpan);
     tab.appendChild(price);
     tab.dataset.variantId = variant.id;
+    tab.dataset.variantTitle = variant.title;
     tabs.appendChild(tab);
+    tab.addEventListener("click", (e) => {
+      selectVariantByTitle(e.currentTarget.dataset.variantTitle);
+      tabs.querySelectorAll(".weeks-tab-button").forEach((tab) => {
+        tab.classList.remove("active");
+      });
+      e.currentTarget.classList.add("active");
+    });
   });
   daySelector.appendChild(tabs);
 };
