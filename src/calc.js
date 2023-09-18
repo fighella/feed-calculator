@@ -9,10 +9,11 @@ import {
 import { appendTimes } from "./index.js";
 
 const calculate_amount = () => {
-  const age = _raw_age_input();
-  const weight = _weight_input();
-  const desexed = _desexed_input();
-  const activity = _activity_input();
+  const age = _raw_age_input().trim();
+  const weight = _weight_input().trim();
+  const desexed = _desexed_input().trim();
+  const activity = _activity_input().trim();
+  console.log(calc_data);
   const age_filter = calc_data.filter((row) => {
     return row.includes(age);
   });
@@ -26,7 +27,7 @@ const calculate_amount = () => {
   }
   var activity_number = 0;
   switch (activity) {
-    case "1 - 10 mins":
+    case "5 - 10 mins":
       activity_number = 0;
       break;
     case "30 mins":
@@ -47,6 +48,7 @@ const calculate_amount = () => {
       return null; // or handle the case where data is missing
     }
   } else {
+    console.log(age, weight, desexed, activity, age_filter);
     console.log("No matching records found.");
     return null; // or handle the case where no matching records are found
   }

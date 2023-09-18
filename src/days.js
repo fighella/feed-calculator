@@ -46,8 +46,11 @@ const showDaySelector = (products) => {
   const tabs_featureholder = document.getElementById("day-selector-features");
   tabs_featureholder.innerHTML = "";
   tabs_featureholder.appendChild(tabs_features);
-
+  const dogs_or_cats =
+    document.getElementById("feeding_calculator").dataset.type;
   filteredProducts[0].variants.forEach((variant) => {
+    const number_of_choices = filteredProducts[0].variants.length;
+    document.getElementById("number_of_choices").innerText = number_of_choices;
     const details = document.createElement("div");
     const tab = document.createElement("div");
 
@@ -59,13 +62,17 @@ const showDaySelector = (products) => {
     size.classList.add("package_size");
     days.classList.add("number_of_days");
     price.classList.add("package_price");
-
-    size.innerText = variant.sku.split(" ")[1];
+    if (dogs_or_cats == "cat") {
+      size.innerText = variant.title.split(":")[0];
+    } else {
+      size.innerText = variant.sku.split(" ")[0];
+    }
     price.innerText = "$" + variant.price;
     days.innerText = calculate_amount();
     tab.classList.add("weeks-tab-button", "calc_days");
     tab.dataset.tabType = "weeks";
-    if (variant.title.includes("2.5") == true) {
+
+    if (variant.title.includes(dogs_or_cats == "cat" ? "900" : "2.5") == true) {
       tab.classList.add("active");
     }
     tab.dataset.tab = `weeks-${variant.sku.split(" ")[1]}`;
@@ -94,6 +101,7 @@ const showDaySelector = (products) => {
     tab.appendChild(price);
     tab.dataset.variantId = variant.id;
     tab.dataset.variantTitle = variant.title;
+    tab.style.width = 100 / number_of_choices + "%";
     tabs.appendChild(tab);
     tab.addEventListener("click", (e) => {
       selectVariantByTitle(e.currentTarget.dataset.variantTitle);

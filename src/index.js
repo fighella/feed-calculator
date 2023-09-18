@@ -45,7 +45,7 @@ const activeFeedAmount = () => {
 
 function daysUpdate(_size, _daily_grams, _feed_amount) {
   // Im sure this is available somewhere else - but i'm tired
-  console.log(_size, _daily_grams, _feed_amount);
+  // console.log(_size, _daily_grams, _feed_amount);
   var filtered_feed_amounts = feedAmountNames.filter(
     (name) => name == activeFeedAmount()
   );
@@ -53,7 +53,6 @@ function daysUpdate(_size, _daily_grams, _feed_amount) {
     var dayLoop = document.querySelectorAll(
       ".calc_days_" + _size + "_" + feed_amount_name
     );
-    console.log("cd", feed_amount_name);
     var cup_day = document.getElementById(`${feed_amount_name}_diet_days`);
     cup_day.innerText = ""; //Clear Cup Day Loop
     prettyNumber(

@@ -36,7 +36,8 @@ const showProducts = async (products) => {
     });
     const cloneDiv = productFromDom.cloneNode(true);
     const active_variant_id = document.querySelector(".calc_days.active");
-    if (active_variant_id !== undefined) {
+    console.log(active_variant_id);
+    if (active_variant_id !== null) {
       selectVariantByTitle(active_variant_id.dataset.variantTitle);
     }
     productItemList.appendChild(cloneDiv);

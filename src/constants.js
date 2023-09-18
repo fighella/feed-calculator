@@ -1,10 +1,13 @@
+const dog_or_cat = document.getElementById("feeding_calculator").dataset.type;
+
 var feedAmounts = [0.2, 0.5, 1];
 var feedAmountNames = ["Topper", "Booster", "Full"];
+
 var packageSizes = [300, 900, 2500, 5000];
 var packageCups = [5, 15, 42, 84];
 var packageNames = ["300g", "900g", "2.5kg", "5kg"];
 var tabTypes = ["main", "quantity", "weeks", "details"];
-var possibleFlavors = ["Chicken", "Beef", "Pork", "Fish"];
+var possibleFlavors = ["Chicken", "Beef", "Pork", "Fish", "Fish & Lamb"];
 var weightRanges = [
   "1 kilo",
   "2.5 kilos",
@@ -21,9 +24,8 @@ var weightRanges = [
 var desexedRanges = ["Yes", "No"];
 var activityRanges = ["1 - 10 mins", "30 mins", "30+ mins"];
 var ageRanges = ["1 - 4 months", "5 - 12 months", "1 - 10 years", "10+ years"];
-var calc_data =
-  `AGE		WEIGHT,False,5 - 10,False, 30,False, 30+,True, 5 - 10,True, 30,True, 30+
-1 - 4 months,1 kilo,0.50,0.50,0.50,0.50,0.50,0.50
+
+var calc_data = `1 - 4 months,1 kilo,0.50,0.50,0.50,0.50,0.50,0.50
 1 - 4 months,2.5 kilos,1.50,1.50,1.50,1.50,1.50,1.50
 1 - 4 months,5 kilos,2.25,2.25,2.25,2.25,2.25,2.25
 1 - 4 months,7.5 kilos,2.75,2.75,2.75,2.75,2.75,2.75
@@ -67,6 +69,32 @@ var calc_data =
 10+ years,30 kilos,4.50,4.75,5.00,4.50,4.75,5.00
 10+ years,35 kilos,5.00,5.25,5.75,5.00,5.25,5.75
 10+ years,40 kilos,5.50,6.00,6.25,5.50,6.00,6.25`.split("\n");
+
+if (dog_or_cat == "cat") {
+  var feedAmounts = [1];
+  var feedAmountNames = ["Full"];
+  var weightRanges = [
+    "1 kilo",
+    "2 kilos",
+    "3 kilos",
+    "4 kilos",
+    "5 kilos",
+    "6 kilos",
+    "7 kilos",
+    "8 kilos",
+    "9 kilos",
+    "10 kilos",
+  ];
+  var ageRanges = ["1 - 10 years"];
+  var calc_data = `1 - 10 years,1 kilo,
+1 - 10 years,2 kilos,0.4,0.4,0.4,0.32,0.32,0.32
+1 - 10 years,3 kilos,0.56,0.56,0.56,0.48,0.48,0.48
+1 - 10 years,4 kilos,0.64,0.64,0.64,0.56,0.56,0.56
+1 - 10 years,5 kilos,0.72,0.72,0.72,0.64,0.64,0.64
+1 - 10 years,6 kilos,0.8,0.8,0.8,0.72,0.72,0.72
+1 - 10 years,7 kilos,1.04,1.04,1.04,0.88,0.88,0.88
+1 - 10 years,8 kilos,1.12,1.12,1.12,0.96,0,96,0.96)`.split("\n");
+}
 
 var calculator_app_url =
   "https://usage-member-liable-evanescence.trycloudflare.com";

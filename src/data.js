@@ -9,8 +9,12 @@ import {
 const getProducts = async () => {
   console.log("----- GET PRODUCTS ------");
   // should just filter get all products TODO
+  const dog_or_cat = document.getElementById("feeding_calculator").dataset.type;
   await fetch(
-    window.Shopify.routes.root + "collections/calculator/products.json"
+    window.Shopify.routes.root +
+      "collections/" +
+      dog_or_cat +
+      "-food-calculator/products.json"
   )
     .then((response) => response.json())
     .then((response) => showProducts(response.products));
@@ -18,9 +22,12 @@ const getProducts = async () => {
 
 const getAllProducts = async () => {
   const allProducts = new Set();
+  const dog_or_cat = document.getElementById("feeding_calculator").dataset.type;
   try {
     const response = await fetch(
-      "https://frontierpets.com.au/collections/calculator/products.json"
+      "https://frontierpets.com.au/collections/" +
+        dog_or_cat +
+        "-food-calculator/products.json"
     );
     if (!response.ok) {
       console.log("Naughty Response");
@@ -37,7 +44,12 @@ const getAllProducts = async () => {
 };
 
 const VariantData = (size_index, el) => {
-  fetch("https://frontierpets.com.au/collections/calculator/products.json")
+  const dog_or_cat = document.getElementById("feeding_calculator").dataset.type;
+  fetch(
+    "https://frontierpets.com.au/collections/" +
+      dog_or_cat +
+      "-food-calculator/products.json"
+  )
     .then((response) => response.json())
     .then((data) => {
       el.innerText = data.products[0].variants[size_index].price;
