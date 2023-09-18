@@ -13,7 +13,6 @@ const calculate_amount = () => {
   const weight = _weight_input().trim();
   const desexed = _desexed_input().trim();
   const activity = _activity_input().trim();
-  console.log(calc_data);
   const age_filter = calc_data.filter((row) => {
     return row.includes(age);
   });

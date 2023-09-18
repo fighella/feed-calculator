@@ -48,6 +48,10 @@ const showDaySelector = (products) => {
   tabs_featureholder.appendChild(tabs_features);
   const dogs_or_cats =
     document.getElementById("feeding_calculator").dataset.type;
+  const calc_percent = document.getElementById("calc_percent");
+  const calc_days = document.getElementById("calc_days");
+  const calc_total = document.getElementById("calc_total");
+  const calc_daily = document.getElementById("calc_daily");
   filteredProducts[0].variants.forEach((variant) => {
     const number_of_choices = filteredProducts[0].variants.length;
     document.getElementById("number_of_choices").innerText = number_of_choices;
@@ -63,18 +67,15 @@ const showDaySelector = (products) => {
     days.classList.add("number_of_days");
     price.classList.add("package_price");
     if (dogs_or_cats == "cat") {
-      size.innerText = variant.title.split(":")[0];
+      size.innerText = "Our " + variant.title.split(":")[0] + " bag";
     } else {
-      size.innerText = variant.sku.split(" ")[1];
+      size.innerText = "Our " + variant.sku.split(" ")[1] + " bag";
     }
-    price.innerText = "$" + variant.price;
+
     days.innerText = calculate_amount();
     tab.classList.add("weeks-tab-button", "calc_days");
     tab.dataset.tabType = "weeks";
 
-    if (variant.title.includes(dogs_or_cats == "cat" ? "900" : "2.5") == true) {
-      tab.classList.add("active");
-    }
     tab.dataset.tab = `weeks-${variant.sku.split(" ")[1]}`;
     const activeFeedAmountSpan = document.createElement("div");
     activeFeedAmountSpan.classList.add("active-feed-amount");
@@ -90,11 +91,31 @@ const showDaySelector = (products) => {
     if (variant.title.includes("2.5")) {
       var size_number = 42;
     }
+    const numberOfDays = Math.floor(
+      size_number / calculate_amount() / _active_feed_amount_multiplier()
+    );
+    const pricePerDay =
+      "Cost: $" + (variant.price / numberOfDays).toFixed(2) + "/day";
+    if (variant.title.includes(dogs_or_cats == "cat" ? "900" : "2.5") == true) {
+      tab.classList.add("active");
 
-    activeFeedAmountSpan.innerText =
-      Math.floor(
-        size_number / calculate_amount() / _active_feed_amount_multiplier()
-      ) + " days";
+      calc_percent.innerText = _active_feed_amount_multiplier() * 100 + "%";
+      calc_days.innerText = numberOfDays;
+      calc_total.innerText = variant.title + ": $" + variant.price;
+      calc_daily.innerText = pricePerDay;
+    }
+    activeFeedAmountSpan.innerText = "will last " + numberOfDays + " days";
+    price.innerText = pricePerDay;
+
+    const activeFeedAmountText = document.getElementById(
+      "active-feed-amount-text"
+    );
+    var filler = _active_feed_amount() == "Full" ? " Diet" : "";
+    var a_or_no_a = _active_feed_amount() == "Full" ? "" : " a ";
+    if (dogs_or_cats == "dog") {
+      activeFeedAmountText.innerText =
+        ", as " + a_or_no_a + _active_feed_amount() + filler + ": ";
+    }
     details.appendChild(size);
     // details.appendChild(days);
     tab.appendChild(details);
@@ -110,6 +131,11 @@ const showDaySelector = (products) => {
         tab.classList.remove("active");
       });
       e.currentTarget.classList.add("active");
+
+      calc_percent.innerText = _active_feed_amount_multiplier() * 100 + "%";
+      calc_days.innerText = numberOfDays;
+      calc_daily.innerText = pricePerDay;
+      calc_total.innerText = variant.title + ": $" + variant.price;
     });
   });
   daySelector.appendChild(tabs);

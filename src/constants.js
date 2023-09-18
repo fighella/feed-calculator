@@ -7,7 +7,7 @@ var packageSizes = [300, 900, 2500, 5000];
 var packageCups = [5, 15, 42, 84];
 var packageNames = ["300g", "900g", "2.5kg", "5kg"];
 var tabTypes = ["main", "quantity", "weeks", "details"];
-var possibleFlavors = ["Chicken", "Beef", "Pork", "Fish", "Fish & Lamb"];
+var possibleFlavors = ["Chicken", "Beef", "Pork", "Fish"];
 var weightRanges = [
   "1 kilo",
   "2.5 kilos",
