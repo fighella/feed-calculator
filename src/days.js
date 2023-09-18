@@ -65,7 +65,7 @@ const showDaySelector = (products) => {
     if (dogs_or_cats == "cat") {
       size.innerText = variant.title.split(":")[0];
     } else {
-      size.innerText = variant.sku.split(" ")[0];
+      size.innerText = variant.sku.split(" ")[1];
     }
     price.innerText = "$" + variant.price;
     days.innerText = calculate_amount();
@@ -90,9 +90,10 @@ const showDaySelector = (products) => {
     if (variant.title.includes("2.5")) {
       var size_number = 42;
     }
+
     activeFeedAmountSpan.innerText =
       Math.floor(
-        (size_number / calculate_amount()) * _active_feed_amount_multiplier()
+        size_number / calculate_amount() / _active_feed_amount_multiplier()
       ) + " days";
     details.appendChild(size);
     // details.appendChild(days);
