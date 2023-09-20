@@ -1,5 +1,5 @@
 import { calculate_amount } from "./calc";
-import { selectVariantByTitle } from "./utils";
+import { selectVariantByIndex, selectVariantByTitle } from "./utils";
 
 import {
   _age_input,
@@ -52,6 +52,7 @@ const showDaySelector = (products) => {
   const calc_days = document.getElementById("calc_days");
   const calc_total = document.getElementById("calc_total");
   const calc_daily = document.getElementById("calc_daily");
+  var vindex = 0;
   filteredProducts[0].variants.forEach((variant) => {
     const number_of_choices = filteredProducts[0].variants.length;
     document.getElementById("number_of_choices").innerText = number_of_choices;
@@ -77,6 +78,9 @@ const showDaySelector = (products) => {
     tab.dataset.tabType = "weeks";
 
     tab.dataset.tab = `weeks-${variant.sku.split(" ")[1]}`;
+    tab.dataset.vindex = vindex;
+
+    vindex = vindex + 1;
     const activeFeedAmountSpan = document.createElement("div");
     activeFeedAmountSpan.classList.add("active-feed-amount");
     if (variant.title.includes("300")) {
@@ -96,14 +100,47 @@ const showDaySelector = (products) => {
     );
     const pricePerDay =
       "Cost: $" + (variant.price / numberOfDays).toFixed(2) + "/day";
-    if (variant.title.includes(dogs_or_cats == "cat" ? "900" : "2.5") == true) {
-      tab.classList.add("active");
-
+    const weeksInfo = document.getElementById("weeks_field").value;
+    if (weeksInfo) {
+      if (variant.title.includes(weeksInfo)) {
+        calc_percent.innerText = _active_feed_amount_multiplier() * 100 + "%";
+        calc_days.innerText = numberOfDays;
+        calc_total.innerText = variant.title + ": $" + variant.price;
+        calc_daily.innerText = pricePerDay;
+        tabs.querySelectorAll(".weeks-tab-button").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        tab.classList.add("active");
+      }
+    } else {
+      if (
+        variant.title.includes(dogs_or_cats == "cat" ? "900" : "2.5") == true
+      ) {
+        calc_percent.innerText = _active_feed_amount_multiplier() * 100 + "%";
+        calc_days.innerText = numberOfDays;
+        calc_total.innerText = variant.title + ": $" + variant.price;
+        calc_daily.innerText = pricePerDay;
+        tabs.querySelectorAll(".weeks-tab-button").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        tab.classList.add("active");
+      }
+    }
+    const active_variant_title = document.querySelectorAll(
+      "#products-list .variant-picker .relative button"
+    );
+    console.log(active_variant_title, variant.title);
+    if (variant.title == active_variant_title.innerText) {
       calc_percent.innerText = _active_feed_amount_multiplier() * 100 + "%";
       calc_days.innerText = numberOfDays;
       calc_total.innerText = variant.title + ": $" + variant.price;
       calc_daily.innerText = pricePerDay;
+      tabs.querySelectorAll(".weeks-tab-button").forEach((tab) => {
+        tab.classList.remove("active");
+      });
+      tab.classList.add("active");
     }
+
     activeFeedAmountSpan.innerText = "will last " + numberOfDays + " days";
     price.innerText = pricePerDay;
 
@@ -127,11 +164,11 @@ const showDaySelector = (products) => {
     tabs.appendChild(tab);
     tab.addEventListener("click", (e) => {
       selectVariantByTitle(e.currentTarget.dataset.variantTitle);
+      // selectVariantByIndex(e.currentTarget.dataset.vindex);
       tabs.querySelectorAll(".weeks-tab-button").forEach((tab) => {
         tab.classList.remove("active");
       });
       e.currentTarget.classList.add("active");
-
       calc_percent.innerText = _active_feed_amount_multiplier() * 100 + "%";
       calc_days.innerText = numberOfDays;
       calc_daily.innerText = pricePerDay;

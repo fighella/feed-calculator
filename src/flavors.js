@@ -1,6 +1,7 @@
 import { getProducts } from "./data.js";
 import { possibleFlavors } from "./constants";
 import { loadProducts } from "./index.js";
+import { selectVariantByTitle } from "./utils.js";
 
 const getAvailableFlavors = (products) => {
   const flavors = new Set();
@@ -13,6 +14,10 @@ const getAvailableFlavors = (products) => {
   });
   showFlavors(Array.from(flavors));
   return flavors;
+};
+
+const setTab = (variantTitle) => {
+  document.getElementById("weeks_field").value = variantTitle;
 };
 
 const showFlavors = (flavors) => {
@@ -51,6 +56,7 @@ const showFlavors = (flavors) => {
       flavors.forEach((flavor) => {
         flavor.classList.remove("active");
       });
+      setTab(document.querySelector(".calc_days.active").dataset.variantTitle);
       flavor_div.classList.add("active");
       document.getElementById("selected_flavor").value = flavor;
       loadProducts();
@@ -62,10 +68,14 @@ const showFlavors = (flavors) => {
 const selectFlavor = () => {
   var flavor_picker = document.getElementById("flavor_picker");
   var flavors = flavor_picker.querySelectorAll(".flavor");
+  // var current_size = document.querySelector(".calc_days.active").dataset.vindex;
   flavors.forEach((flavor) => {
     flavor.addEventListener("click", function (event) {
       event.preventDefault();
-      loadProducts();
+      // loadProducts();
+      setTab(event.currentTarget.dataset.title);
+      const actives = document.querySelector(".calc_days.active"); //.click();
+      actives.click();
     });
   });
 };

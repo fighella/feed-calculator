@@ -43,7 +43,27 @@ function prettyNumber(_number, el) {
 }
 
 const selectVariantByTitle = (variantTitle) => {
-  document.querySelector(`[value="${variantTitle}"]`).click();
+  const sameVars = document.querySelectorAll(`[value="${variantTitle}"]`);
+  sameVars.forEach((sameVar) => {
+    sameVar.click();
+  });
+};
+
+const selectVariantByIndex = () => {
+  // if (index) {
+  //   console.log(
+  //     "Butones",
+  //     parseInt(index) + 1,
+  //     el.querySelector("variant-picker").querySelectorAll("button")[
+  //       parseInt(index) + 1
+  //     ]
+  //     // document.getElementById("products-list").querySelector(".variant-picker")
+  //     // .shadowRoot.querySelectorAll("[data-option-select]")
+  //   ); // alert(index);
+  // }
+  // document.querySelector(`[data-vindex-variant="${index}"]`).click();
+  // const actives = document.querySelector(".calc_days.active"); //.click();
+  // actives.click();
 };
 
 const decimalToFraction = (_decimal) => {
@@ -90,4 +110,5 @@ export {
   parameterizeString,
   checkIsCalculator,
   selectVariantByTitle,
+  selectVariantByIndex,
 };
