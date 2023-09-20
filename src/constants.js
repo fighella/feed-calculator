@@ -1,4 +1,10 @@
-const dog_or_cat = document.getElementById("feeding_calculator").dataset.type;
+var dog_or_cat = "dog";
+if (document.getElementById("feeding_calculator")) {
+  var dog_or_cat = document.getElementById("feeding_calculator").dataset.type;
+}
+if (document.getElementById("product-page-calculator")) {
+  var dog_or_cat = "dog";
+}
 
 var feedAmounts = [0.2, 0.5, 1];
 var feedAmountNames = ["Topper", "Booster", "Full"];

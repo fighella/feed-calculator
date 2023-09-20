@@ -7,6 +7,7 @@ import {
   packageCups,
   packageNames,
 } from "./constants.js";
+import { productPageCalculator } from "./product-page.js";
 import {
   VariantData,
   getProducts,
@@ -164,6 +165,17 @@ const loadCalculator = () => {
   calculate();
 };
 
+const checkIsProductPageCalculator = () => {
+  const productPageCalculator = document.getElementById(
+    "product-page-calculator"
+  );
+  if (productPageCalculator) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const loadProducts = () => {
   getAllProducts().then((products) => {
     showDaySelector(products);
@@ -182,6 +194,10 @@ window.addEventListener("load", () => {
     loadProducts();
   } else {
     _devDidNotLoadMessage();
+  }
+  if (checkIsProductPageCalculator()) {
+    console.log("Go Here!");
+    productPageCalculator();
   }
 });
 
