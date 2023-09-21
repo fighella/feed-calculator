@@ -4,7 +4,7 @@ module.exports = {
   entry: "./src/index.js", // The entry point for your JavaScript code
   mode: "development",
   output: {
-    filename: "bundle-v4.js", // The name of the compiled output file
+    filename: "bundle-v5.js", // The name of the compiled output file
     path: path.resolve(__dirname, "dist"), // The output directory
   },
 };

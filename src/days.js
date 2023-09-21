@@ -33,12 +33,12 @@ const showDaySelector = (products) => {
     // }
     if (variant.title.includes("5") && !variant.title.includes("2.5")) {
       savings.classList.add("savings");
-      savings.innerText = "Save 20%";
+      savings.innerText = "Save 13%";
       tab.appendChild(savings);
     }
     if (variant.title.includes("2.5")) {
       savings.classList.add("savings");
-      savings.innerText = "Save 10%";
+      savings.innerText = "Save 7%";
       tab.appendChild(savings);
     }
     tabs_features.appendChild(tab);

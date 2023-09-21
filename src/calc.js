@@ -58,15 +58,59 @@ const updateAmounts = () => {
 };
 
 const updateProductPageAmounts = () => {
+  const selectedSizeBlock = document.querySelector(":checked + .block-swatch");
+  const selectedPrice = document
+    .querySelector(".price-list--product sale-price")
+    .innerText.split("$")[1];
+  const selectedSize = selectedSizeBlock.innerText;
+  if (selectedSize.includes("300")) {
+    var packageCups = 5;
+    var packageNice = "300g";
+  }
+  if (selectedSize.includes("900")) {
+    var packageCups = 15;
+    var packageNice = "900g";
+  }
+  if (selectedSize.includes("2.5")) {
+    var packageCups = 42;
+    var packageNice = "2.5kg";
+  }
+  if (selectedSize.includes(" 5")) {
+    var packageCups = 84;
+    var packageNice = "5kg";
+  }
   const topperDietCups = document.getElementById("Topper_diet_days");
   const boosterDietCups = document.getElementById("Booster_diet_days");
   const fullDietCups = document.getElementById("Full_diet_days");
   const topperDietCupsAmount = calculate_amount() * 0.2;
   const boosterDietCupsAmount = calculate_amount() * 0.5;
   const fullDietCupsAmount = calculate_amount();
-  topperDietCups.innerText = `${topperDietCupsAmount} cups/day`;
-  boosterDietCups.innerText = `${boosterDietCupsAmount} cups/day`;
-  fullDietCups.innerText = `${fullDietCupsAmount} cups/day`;
+
+  topperDietCups.innerText = `${topperDietCupsAmount.toFixed(2)} cups/day`;
+  boosterDietCups.innerText = `${boosterDietCupsAmount.toFixed(2)} cups/day`;
+  fullDietCups.innerText = `${fullDietCupsAmount.toFixed(2)} cups/day`;
+
+  const topperDietLast = document.createElement("div");
+  topperDietLast.innerText = `${packageNice} will last ${Math.floor(
+    packageCups / topperDietCupsAmount
+  )} days.  Cost: $${(
+    selectedPrice / Math.floor(packageCups / topperDietCupsAmount)
+  ).toFixed(2)}/day`;
+  topperDietCups.appendChild(topperDietLast);
+  const boosterDietLast = document.createElement("div");
+  boosterDietLast.innerText = `${packageNice} will last ${Math.floor(
+    packageCups / boosterDietCupsAmount
+  )} days. Cost: $${(
+    selectedPrice / Math.floor(packageCups / boosterDietCupsAmount)
+  ).toFixed(2)}/day`;
+  boosterDietCups.appendChild(boosterDietLast);
+  const fullDietLast = document.createElement("div");
+  fullDietLast.innerText = `${packageNice} will last ${Math.floor(
+    packageCups / fullDietCupsAmount
+  )} days. Cost: $${(
+    selectedPrice / Math.floor(packageCups / fullDietCupsAmount)
+  ).toFixed(2)}/day`;
+  fullDietCups.appendChild(fullDietLast);
 };
 
 const updateCalculations = (amount) => {

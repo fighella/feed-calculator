@@ -56,11 +56,9 @@ const productPageCalculator = () => {
   const response = document.createElement("div");
   response.appendChild(formAnswers);
   productPageBlock.classList.add("product-page-calculator");
-  productPageBlock.style.display = "flex";
   formQuestions.querySelector("h2.heading").style.display = "none";
-  productPageBlock.style.flexDirection = "row";
   questions.classList.add("questions");
-  questions.style.width = "50%";
+
   document.getElementById("calculator-form").dataset.form =
     "product-page-calculator";
   formQuestions.querySelector("h2.heading").innerText = currentVariantTitle();
@@ -73,7 +71,8 @@ const productPageCalculator = () => {
 
   questions.appendChild(changeProductMessage);
   response.classList.add("response");
-  response.style.width = "50%";
+  questions.classList.add("half");
+  response.classList.add("half");
   productPageBlock.appendChild(questions);
   productPageBlock.appendChild(response);
 
