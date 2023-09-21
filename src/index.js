@@ -169,8 +169,14 @@ const checkIsProductPageCalculator = () => {
   const productPageCalculator = document.getElementById(
     "product-page-calculator"
   );
+  const is_calc = document.querySelector(".is_calculator");
   if (productPageCalculator) {
-    return true;
+    if (is_calc) {
+      return true;
+    } else {
+      productPageCalculator.parentNode.style.display = "none";
+      return false;
+    }
   } else {
     return false;
   }
