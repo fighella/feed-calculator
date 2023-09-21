@@ -174,7 +174,7 @@ const checkIsProductPageCalculator = () => {
     if (is_calc) {
       return true;
     } else {
-      productPageCalculator.parentNode.style.display = "none";
+      productPageCalculator.parentNode.parentNode.style.display = "none";
       return false;
     }
   } else {
