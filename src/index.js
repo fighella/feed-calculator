@@ -22,8 +22,8 @@ import { tabClicks } from "./tabs.js";
 import { prettyNumber, checkIsCalculator } from "./utils.js";
 import { updateAmounts } from "./calc.js";
 import { selectFlavor, getAvailableFlavors } from "./flavors.js";
-import { showDaySelector } from "./days.js";
 import { showProducts } from "./products.js";
+import { showDaySelector } from "./days.js";
 
 function calculate() {
   const petForm = document.getElementById("pet-form");

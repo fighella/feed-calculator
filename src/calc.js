@@ -57,9 +57,21 @@ const updateAmounts = () => {
   updateCalculations(calculate_amount());
 };
 
+const updateProductPageAmounts = () => {
+  const topperDietCups = document.getElementById("Topper_diet_days");
+  const boosterDietCups = document.getElementById("Booster_diet_days");
+  const fullDietCups = document.getElementById("Full_diet_days");
+  const topperDietCupsAmount = calculate_amount() * 0.2;
+  const boosterDietCupsAmount = calculate_amount() * 0.5;
+  const fullDietCupsAmount = calculate_amount();
+  topperDietCups.innerText = `${topperDietCupsAmount} cups/day`;
+  boosterDietCups.innerText = `${boosterDietCupsAmount} cups/day`;
+  fullDietCups.innerText = `${fullDietCupsAmount} cups/day`;
+};
+
 const updateCalculations = (amount) => {
   var cups = amount;
   appendTimes(cups, amount);
 };
 
-export { updateAmounts, calculate_amount };
+export { updateAmounts, calculate_amount, updateProductPageAmounts };

@@ -8,7 +8,11 @@ if (document.getElementById("product-page-calculator")) {
 
 var feedAmounts = [0.2, 0.5, 1];
 var feedAmountNames = ["Topper", "Booster", "Full"];
-
+var feedAmountDescriptions = [
+  "Add to your current feeding regime by adding 20% of the daily feeding amount to 80% of their current diet.",
+  "A must for fussy animals or those that want to feed a variety. Substitute 50% of your pet’s current diet with Frontier Pets food. Either as one meal a day or with the existing food.",
+  "Over-the-top nutrition with ultra-convenience.Feed Frontier Pets food 100% of the time. Change varieties often to maintain interest.",
+];
 var packageSizes = [300, 900, 2500, 5000];
 var packageCups = [5, 15, 42, 84];
 var packageNames = ["300g", "900g", "2.5kg", "5kg"];
@@ -118,4 +122,5 @@ export {
   weightRanges,
   desexedRanges,
   activityRanges,
+  feedAmountDescriptions,
 };
