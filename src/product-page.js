@@ -12,25 +12,26 @@ const updateVariantTitle = (clickedTitle = false) => {
     clickedTitle || currentVariantTitle();
 };
 
-const feedNav = (holder) => {
-  var index = 0;
-  feedAmountNames.forEach((name) => {
-    const feedBlock = document.createElement("div");
-    feedBlock.classList.add("feed-amount");
-    const feedBlockName = document.createElement("div");
-    const feedBlockDescription = document.createElement("div");
-    const feedBlockAmount = document.createElement("div");
-    feedBlock.dataset.feedAmountName = name;
-    feedBlockName.innerText = name;
-    feedBlock.holder.appendChild(feedBlockName);
-  });
-};
+// const feedNav = (holder) => {
+//   var index = 0;
+//   feedAmountNames.forEach((name) => {
+//     const feedBlock = document.createElement("div");
+//     feedBlock.classList.add("feed-amount");
+//     const feedBlockName = document.createElement("div");
+//     const feedBlockDescription = document.createElement("div");
+//     const feedBlockAmount = document.createElement("div");
+//     feedBlock.dataset.feedAmountName = name;
+//     feedBlockName.innerText = name;
+//     feedBlock.holder.appendChild(feedBlockName);
+//   });
+// };
 
 const watchVariants = () => {
   const variantPicker = document.querySelectorAll(".block-swatch");
   variantPicker.forEach((variant) => {
     variant.addEventListener("click", (evt) => {
       updateVariantTitle(evt.currentTarget.innerText);
+      calculateAmounts();
     });
   });
 };
@@ -40,7 +41,6 @@ const calculateAmounts = () => {
 };
 
 const productPageCalculator = () => {
-  watchVariants();
   const formFields = document.getElementById("calculator-form").content;
   const formResults = document.getElementById("calculator-results").content;
 
@@ -75,10 +75,12 @@ const productPageCalculator = () => {
   response.classList.add("half");
   productPageBlock.appendChild(questions);
   productPageBlock.appendChild(response);
+  watchVariants();
+  const calky = document.getElementById("product-page-calculator");
 
-  document
-    .getElementById("product-page-calculator")
-    .appendChild(productPageBlock);
+  calky.innerHTML = "";
+
+  calky.appendChild(productPageBlock);
 };
 
 export { productPageCalculator };
