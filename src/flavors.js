@@ -31,7 +31,8 @@ const showFlavors = (flavors) => {
     var flavor_span = document.createElement("h4");
     var flavor_div = document.createElement("div");
     flavor_span.classList.add("header_secondary");
-    flavor_span.innerText = flavor;
+    console.log("Flavor", flavor);
+    flavor_span.innerText = flavor == "Fish" ? "Fish with Lamb" : flavor;
     flavors_block.appendChild(flavor_div);
     flavor_div.classList.add("flavor");
     flavor_div.id = flavor.toLowerCase() + "_flavor";
@@ -46,7 +47,10 @@ const showFlavors = (flavors) => {
       flavor_img.style.border = "2px solid var(--fp-blue)";
     }
     var flavor_img_img = document.createElement("img");
-    flavor_img_img.src = `//frontierpets.com.au/cdn/shop/t/28/assets/calculator_${flavor.toLowerCase()}.png?v=60236831986002879221693601154`;
+    flavor_img_img.src = `//frontierpets.com.au/cdn/shop/t/56/assets/calculator_${
+      flavor.toLowerCase() == "fish" ? "fish_with_lamb" : flavor.toLowerCase()
+    }.png?v=60236831986002879221693601154`;
+    // alert("Flavor!");
     flavor_img.appendChild(flavor_img_img);
     flavor_div.appendChild(flavor_img);
     flavor_div.appendChild(flavor_span);

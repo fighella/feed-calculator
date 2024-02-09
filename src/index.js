@@ -202,7 +202,7 @@ window.addEventListener("load", () => {
     _devDidNotLoadMessage();
   }
   if (checkIsProductPageCalculator()) {
-    console.log("Go Here!");
+    console.log("Gosss Here!");
     productPageCalculator();
   }
 });
